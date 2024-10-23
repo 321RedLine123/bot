@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лимоны</title>
+    <style>
+        body {
+            position: relative;
+            overflow: hidden;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .lemon {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: url('/Users/New/Desktop/bot/image/—Pngtree—a\ lemon_4634245.png') no-repeat center center;
+            background-size: contain;
+        }
+        #score {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div id="score">Счет: 0</div>
+    <script>
+        let score = 0;
+
+        function createLemon() {
+            const lemon = document.createElement('div');
+            lemon.className = 'lemon';
+            lemon.style.left = Math.random() * window.innerWidth + 'px';
+            lemon.style.top = '0px';
+            document.body.appendChild(lemon);
+
+            lemon.addEventListener('click', function() {
+                score++;
+                document.getElementById('score').innerText = 'Счет: ' + score;
+                document.body.removeChild(lemon);
+            });
+
+            let fallInterval = setInterval(function() {
+                let top = parseInt(lemon.style.top);
+                if (top > window.innerHeight) {
+                    clearInterval(fallInterval);
+                    document.body.removeChild(lemon);
+                } else {
+                    lemon.style.top = top + 5 + 'px';
+                }
+            }, 100);
+        }
+
+        setInterval(createLemon, 1000);
+    </script>
+</body>
+</html>
